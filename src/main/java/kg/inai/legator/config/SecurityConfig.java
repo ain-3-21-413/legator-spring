@@ -38,6 +38,8 @@ public class SecurityConfig {
         http.csrf().disable()
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authCustomizer -> authCustomizer
+                        .requestMatchers(HttpMethod.POST, "/api/v1/user").hasAuthority("LIBRARIAN")
+                        .requestMatchers("/api/v1/auth/login").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement()
