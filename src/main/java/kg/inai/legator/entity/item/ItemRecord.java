@@ -1,10 +1,6 @@
 package kg.inai.legator.entity.item;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import kg.inai.legator.entity.bibliographicrecord.BibliographicRecord;
 import kg.inai.legator.entity.patron.Patron;
 import lombok.AllArgsConstructor;
@@ -30,8 +26,7 @@ public class ItemRecord {
     @JoinColumn(name = "bibliographic_record_id")
     BibliographicRecord bibliographicRecord;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_record_status_id")
+    @Enumerated(EnumType.STRING)
     ItemRecordStatus itemRecordStatus;
 
     @ManyToOne(cascade = CascadeType.ALL)

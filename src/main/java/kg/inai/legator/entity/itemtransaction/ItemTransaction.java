@@ -1,5 +1,6 @@
 package kg.inai.legator.entity.itemtransaction;
 
+import jakarta.persistence.*;
 import kg.inai.legator.entity.Librarian;
 import kg.inai.legator.entity.item.ItemRecord;
 import kg.inai.legator.entity.patron.Patron;
@@ -10,15 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Date;
+import java.util.Date;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Getter
 @Setter
@@ -44,9 +38,8 @@ public class ItemTransaction {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_record_id")
     ItemRecord itemRecord;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_transaction_type_id")
+
+    @Enumerated(EnumType.STRING)
     ItemTransactionType itemTransactionType;
     
     Date issuesAt;
