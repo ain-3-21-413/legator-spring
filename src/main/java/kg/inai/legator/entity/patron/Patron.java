@@ -1,10 +1,6 @@
 package kg.inai.legator.entity.patron;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import kg.inai.legator.entity.User;
 import kg.inai.legator.entity.item.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -36,8 +32,7 @@ public class Patron {
     
     String email;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "access_level_id")
+    @Enumerated(EnumType.STRING)
     AccessLevel accessLevel;
     
     @ManyToOne(cascade = CascadeType.ALL)

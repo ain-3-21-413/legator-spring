@@ -4,7 +4,6 @@ import kg.inai.legator.entity.item.ItemRecord;
 import kg.inai.legator.entity.item.ItemRecordStatus;
 import kg.inai.legator.entity.itemtransaction.ItemTransaction;
 import kg.inai.legator.entity.itemtransaction.ItemTransactionType;
-import kg.inai.legator.model.ItemRecordTransactionModel;
 import kg.inai.legator.model.circulation.OutModel;
 import kg.inai.legator.repository.LibrarianRepository;
 import kg.inai.legator.repository.item.ItemRecordRepository;

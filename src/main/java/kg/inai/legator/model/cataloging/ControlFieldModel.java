@@ -1,4 +1,4 @@
-package kg.inai.legator.model;
+package kg.inai.legator.model.cataloging;
 
 public record ControlFieldModel(
 	String tag,
