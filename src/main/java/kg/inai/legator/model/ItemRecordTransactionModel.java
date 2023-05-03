@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public record ItemRecordTransactionModel(
 
-	Long id,
     String patronId,
     String librarianId,
     String itemRecordId,

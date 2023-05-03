@@ -29,12 +29,8 @@ public class PatronGroup {
     int checkedOutDuration;
     
     int holdDuration;
-    
-    int renewedDuration;
-    
+
     int checkedOutCount;
     
     int holdCount;
-    
-    int renewsAllowedCount;
 }

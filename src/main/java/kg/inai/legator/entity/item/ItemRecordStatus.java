@@ -11,18 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
-@FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Entity
-public class ItemRecordStatus {
-    
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Id
-    int id;
-    
-    String name;
+public enum ItemRecordStatus {
+    AVAILABLE, CHECKED_OUT, HOLD, CANCELED
 }
