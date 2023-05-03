@@ -2,6 +2,7 @@ package kg.inai.legator.advice;
 
 import java.util.Date;
 
+import kg.inai.legator.exception.PatronGroupNameTakenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,7 +28,7 @@ public class RestApiExceptionHandler {
         );
     }
 
-    @ExceptionHandler(UsernameTakenException.class)
+    @ExceptionHandler({UsernameTakenException.class, PatronGroupNameTakenException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorMessage usernameTakenException(Exception exception, WebRequest request) {
         return new ErrorMessage(

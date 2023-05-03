@@ -8,4 +8,6 @@ import kg.inai.legator.entity.patron.PatronGroup;
 @Repository
 public interface PatronGroupRepository extends JpaRepository<PatronGroup, Integer> {
 
+    boolean existsByName(String name);
+
 }

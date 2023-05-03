@@ -9,7 +9,7 @@ public record PatronModel(
     String middleName,
     String phone,
     String email,
-    String accessLevel,
+    int accessLevel,
     CreateUserRequest user
 ) {
 
