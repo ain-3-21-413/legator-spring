@@ -29,8 +29,7 @@ public class ItemRecord {
     @Enumerated(EnumType.STRING)
     ItemRecordStatus itemRecordStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "access_level_id")
+    @Enumerated(EnumType.STRING)
     AccessLevel accessLevel;
     
     @ManyToOne(cascade = CascadeType.ALL)

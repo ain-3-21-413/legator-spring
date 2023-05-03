@@ -1,4 +1,4 @@
-package kg.inai.legator.model;
+package kg.inai.legator.model.patrons;
 
 import kg.inai.legator.model.user.CreateUserRequest;
 
@@ -9,7 +9,7 @@ public record PatronModel(
     String middleName,
     String phone,
     String email,
-    int accessLevel,
+    String accessLevel,
     CreateUserRequest user
 ) {
 

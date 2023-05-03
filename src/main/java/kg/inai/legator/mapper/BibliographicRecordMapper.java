@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import kg.inai.legator.entity.bibliographicrecord.BibliographicRecord;
 import kg.inai.legator.entity.bibliographicrecord.ControlField;
 import kg.inai.legator.entity.bibliographicrecord.DataField;
-import kg.inai.legator.model.BibliographicRecordModel;
-import kg.inai.legator.model.ControlFieldModel;
-import kg.inai.legator.model.DataFieldModel;
-import kg.inai.legator.model.LeaderModel;
-import kg.inai.legator.model.SubfieldModel;
+import kg.inai.legator.model.cataloging.BibliographicRecordModel;
+import kg.inai.legator.model.cataloging.ControlFieldModel;
+import kg.inai.legator.model.cataloging.DataFieldModel;
+import kg.inai.legator.model.cataloging.LeaderModel;
+import kg.inai.legator.model.cataloging.SubfieldModel;
 import kg.inai.legator.entity.bibliographicrecord.Leader;
 import kg.inai.legator.entity.bibliographicrecord.Subfield;
 

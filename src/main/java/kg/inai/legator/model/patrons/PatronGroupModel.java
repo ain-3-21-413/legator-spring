@@ -1,4 +1,4 @@
-package kg.inai.legator.model;
+package kg.inai.legator.model.patrons;
 
 public record PatronGroupModel(
     String name,

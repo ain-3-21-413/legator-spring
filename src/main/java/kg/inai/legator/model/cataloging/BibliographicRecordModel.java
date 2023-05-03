@@ -1,4 +1,4 @@
-package kg.inai.legator.model;
+package kg.inai.legator.model.cataloging;
 
 import java.util.List;
 
