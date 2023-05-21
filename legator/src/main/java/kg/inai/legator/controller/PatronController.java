@@ -2,6 +2,7 @@ package kg.inai.legator.controller;
 
 
 import kg.inai.legator.dto.PatronDto;
+import kg.inai.legator.dto.request.PatronRequest;
 import kg.inai.legator.service.PatronService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,14 +29,19 @@ public class PatronController {
         return patronService.getPatrons();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+
     public void saveOrUpdatePatron(@RequestBody PatronDto patronDto) {
         patronService.saveOrUpdatePatron(patronDto);
     }
 
-    @GetMapping("/exists")
-    public boolean existsPatronByStudentNumber(@RequestParam("student-number") String studentNumber) {
-        return patronService.existsPatronByStudentNumber(studentNumber);
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void addPatron(@RequestBody PatronDto patronDto) {
+        patronService.addPatron(patronDto);
+    }
+
+    @PutMapping("/{student-number}")
+    public void updatePatron(@PathVariable("student-number") String studentNumber, @RequestBody PatronRequest patronRequest) {
+        patronService.updatePatron(studentNumber, patronRequest);
     }
 }

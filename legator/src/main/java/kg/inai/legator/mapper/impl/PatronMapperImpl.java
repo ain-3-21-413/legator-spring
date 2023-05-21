@@ -1,6 +1,7 @@
 package kg.inai.legator.mapper.impl;
 
 import kg.inai.legator.dto.PatronDto;
+import kg.inai.legator.dto.request.PatronRequest;
 import kg.inai.legator.entity.Patron;
 import kg.inai.legator.enums.*;
 import kg.inai.legator.exception.InvalidSelectOptionException;
@@ -121,6 +122,87 @@ public class PatronMapperImpl implements PatronMapper {
                 .password(patronDto.password())
                 .generalNotes(patronDto.generalNotes())
                 .alertNotes(patronDto.alertNotes())
+                .build();
+    }
+
+    @Override
+    public Patron toEntity(String studentNumber, PatronRequest patronRequest) {
+        ELibrary library = null;
+        EPatronStatus status = null;
+        EPatronPolicy policy = null;
+        ESex sex = null;
+        EHomeroom homeroom = null;
+        EHomeroom secondLocation = null;
+
+        if (patronRequest.library() != null) {
+            try {
+                library = ELibrary.valueOf(patronRequest.library());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+        if (patronRequest.status() != null) {
+            try {
+                status = EPatronStatus.valueOf(patronRequest.status());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+        if (patronRequest.policy() != null) {
+            try {
+                policy = EPatronPolicy.valueOf(patronRequest.policy());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+        if (patronRequest.sex() != null) {
+            try {
+                sex = ESex.valueOf(patronRequest.sex());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+        if (patronRequest.homeroom() != null) {
+            try {
+                homeroom = EHomeroom.valueOf(patronRequest.homeroom());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+        if (patronRequest.secondLocation() != null) {
+            try {
+                secondLocation = EHomeroom.valueOf(patronRequest.secondLocation());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+
+        return Patron.builder()
+                .studentNumber(studentNumber)
+                .firstName(patronRequest.firstName())
+                .middleName(patronRequest.middleName())
+                .lastName(patronRequest.lastName())
+                .library(library)
+                .status(status)
+                .policy(policy)
+                .birthDate(patronRequest.birthDate())
+                .sex(sex)
+                .homeroom(homeroom)
+                .secondLocation(secondLocation)
+                .graduationDate(patronRequest.graduationDate())
+                .accountExpiration(patronRequest.accountExpiration())
+                .primaryEmail(patronRequest.primaryEmail())
+                .instituteEmail(patronRequest.instituteEmail())
+                .primaryPhone(patronRequest.primaryPhone())
+                .mobile(patronRequest.mobile())
+                .messengers(patronRequest.messengers())
+                .address1(patronRequest.address1())
+                .address2(patronRequest.address2())
+                .contactNotes(patronRequest.contactNotes())
+                .username(patronRequest.username())
+                .password(patronRequest.password())
+                .generalNotes(patronRequest.generalNotes())
+                .alertNotes(patronRequest.alertNotes())
                 .build();
     }
 }

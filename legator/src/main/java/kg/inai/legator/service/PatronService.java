@@ -1,6 +1,7 @@
 package kg.inai.legator.service;
 
 import kg.inai.legator.dto.PatronDto;
+import kg.inai.legator.dto.request.PatronRequest;
 
 import java.util.List;
 
@@ -12,5 +13,7 @@ public interface PatronService {
 
     void saveOrUpdatePatron(PatronDto patronDto);
 
-    boolean existsPatronByStudentNumber(String studentNumber);
+    void addPatron(PatronDto patronDto);
+
+    void updatePatron(String studentNumber, PatronRequest patronRequest);
 }
