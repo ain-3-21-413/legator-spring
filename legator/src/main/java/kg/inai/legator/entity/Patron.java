@@ -51,7 +51,6 @@ public class Patron {
     String contactNotes;
     String username;
     String password;
-    String confirmPassword;
     @Column(length = 5000)
     String generalNotes;
     @Column(length = 5000)

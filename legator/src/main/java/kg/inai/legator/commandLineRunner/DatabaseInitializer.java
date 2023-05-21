@@ -1,5 +1,6 @@
 package kg.inai.legator.commandLineRunner;
 
+import jakarta.transaction.Transactional;
 import kg.inai.legator.entity.Patron;
 import kg.inai.legator.entity.PatronGroup;
 import kg.inai.legator.repository.PatronGroupRepository;
@@ -7,11 +8,9 @@ import kg.inai.legator.repository.PatronRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Component
@@ -31,13 +30,23 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .firstName("firstName")
                 .lastName("lastName")
                 .build();
+        Patron patron2 = Patron.builder()
+                .studentNumber("2")
+                .firstName("firstName")
+                .lastName("lastName")
+                .build();
+        Patron patron3 = Patron.builder()
+                .studentNumber("3")
+                .firstName("firstName")
+                .lastName("lastName")
+                .build();
         patron = patronRepository.save(patron);
+        patron2 = patronRepository.save(patron2);
+        patron3 = patronRepository.save(patron3);
 
         patronGroup.addPatron(patron);
+        patronGroup.addPatron(patron2);
+        patronGroup.addPatron(patron3);
         patronGroupRepository.save(patronGroup);
-
-        log.info(
-                patronGroupRepository.findById("patronGroup").orElseThrow().getPatrons().toString()
-        );
     }
 }
