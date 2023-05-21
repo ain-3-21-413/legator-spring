@@ -2,14 +2,14 @@ package kg.inai.legator.entity;
 
 import jakarta.persistence.*;
 import kg.inai.legator.enums.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Setter
 @Getter
@@ -56,4 +56,16 @@ public class Patron {
     String generalNotes;
     @Column(length = 5000)
     String alertNotes;
+
+    public void setGroup(PatronGroup group) {
+        if (this.group != null) {
+            this.getGroup().getPatrons().remove(this);
+        }
+
+        this.group = group;
+
+        if (this.group != null) {
+            this.group.getPatrons().add(this);
+        }
+    }
 }
