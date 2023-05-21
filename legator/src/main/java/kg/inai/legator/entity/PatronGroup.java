@@ -22,6 +22,7 @@ public class PatronGroup {
 
     @Id
     String name;
+
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Patron> patrons = new ArrayList<>();
 
