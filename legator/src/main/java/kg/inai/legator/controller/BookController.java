@@ -63,4 +63,11 @@ public class BookController {
         Book book = bookRepository.findById(bookId).orElseThrow();
         return itemRepository.findAllByBook(book).stream().map(itemMapper::toItemDto).toList();
     }
+
+    @GetMapping("/search")
+    public List<BookDto> search(@RequestParam("name") String name, @RequestParam("value") String value) {
+        List<BookField> bookFields = bookFieldRepository.customFind(name, value);
+        return bookFields.stream().map(BookField::getBook).map(bookMapper::toBookDto).toList();
+//        itemRepository.findAllByBookAnd
+    }
 }
