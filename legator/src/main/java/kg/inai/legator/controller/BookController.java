@@ -1,10 +1,14 @@
 package kg.inai.legator.controller;
 
 import kg.inai.legator.dto.BookDto;
+import kg.inai.legator.dto.ItemDto;
 import kg.inai.legator.entity.Book;
 import kg.inai.legator.entity.BookField;
+import kg.inai.legator.mapper.BookMapper;
+import kg.inai.legator.mapper.ItemMapper;
 import kg.inai.legator.repository.BookFieldRepository;
 import kg.inai.legator.repository.BookRepository;
+import kg.inai.legator.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,9 @@ public class BookController {
 
     final BookFieldRepository bookFieldRepository;
     final BookRepository bookRepository;
+    final BookMapper bookMapper;
+    final ItemRepository itemRepository;
+    final ItemMapper itemMapper;
 
     @PostMapping
     public void addBook(@RequestBody Map<String, Object> book) {
@@ -39,25 +46,21 @@ public class BookController {
         book.forEach((s, o) -> {
             BookField bookField = bookFieldRepository.findByNameAndBook(s, newBook).orElseThrow();
             bookField.setBook(newBook);
+            bookField.setName(s);
+            bookField.setValue((String) o);
             bookFieldRepository.save(bookField);
         });
         bookRepository.save(newBook);
     }
 
-    private BookDto mapToDto(Book book) {
-        return new BookDto(
-                book.getId(),
-                book.getBookFields().stream().map(bookField -> {
-                    return new BookDto.BookFieldDto(
-                            bookField.getName(),
-                            bookField.getValue()
-                    );
-                }).toList()
-        );
-    }
-
     @GetMapping
     public List<BookDto> getBooks() {
-        return bookRepository.findAll().stream().map(this::mapToDto).toList();
+        return bookRepository.findAll().stream().map(bookMapper::toBookDto).toList();
+    }
+
+    @GetMapping("/{book-id}/items")
+    public List<ItemDto> getItems(@PathVariable("book-id") long bookId) {
+        Book book = bookRepository.findById(bookId).orElseThrow();
+        return itemRepository.findAllByBook(book).stream().map(itemMapper::toItemDto).toList();
     }
 }

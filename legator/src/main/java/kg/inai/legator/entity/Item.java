@@ -1,6 +1,7 @@
 package kg.inai.legator.entity;
 
 import jakarta.persistence.*;
+import kg.inai.legator.enums.EItemStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,15 +16,22 @@ import java.util.List;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class Book {
+public class Item {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     long id;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    List<BookField> bookFields = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    EItemStatus status = EItemStatus.AVAILABLE;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    List<Item> items = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    Book book;
+
+    @OneToOne(mappedBy = "item")
+    Operation operation;
+
+    @OneToMany(mappedBy = "item")
+    List<OperationArchive> operationArchives = new ArrayList<>();
 }

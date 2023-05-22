@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @ToString
 @NoArgsConstructor
@@ -15,15 +14,23 @@ import java.util.List;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class Book {
+public class OperationArchive {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     long id;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    List<BookField> bookFields = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "patron_id")
+    Patron patron;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    List<Item> items = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    Item item;
+
+    LocalDate issuedAt;
+
+    LocalDate dueTo;
+
+    LocalDate returnDate;
 }

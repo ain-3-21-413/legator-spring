@@ -6,6 +6,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @NoArgsConstructor
@@ -55,7 +57,10 @@ public class Patron {
     String generalNotes;
     @Column(length = 5000)
     String alertNotes;
-
+    @OneToMany(mappedBy = "patron")
+    List<Operation> operations = new ArrayList<>();
+    @OneToMany(mappedBy = "patron")
+    List<OperationArchive> operationArchives = new ArrayList<>();
     public void setGroup(PatronGroup group) {
         if (this.group != null) {
             this.getGroup().getPatrons().remove(this);

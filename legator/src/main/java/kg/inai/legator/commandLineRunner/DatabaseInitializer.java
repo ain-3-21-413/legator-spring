@@ -1,8 +1,7 @@
 package kg.inai.legator.commandLineRunner;
 
 import kg.inai.legator.entity.*;
-import kg.inai.legator.repository.PatronGroupRepository;
-import kg.inai.legator.repository.PatronRepository;
+import kg.inai.legator.repository.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,9 +18,11 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     final PatronRepository patronRepository;
     final PatronGroupRepository patronGroupRepository;
+    final BookRepository bookRepository;
+    final BookFieldRepository bookFieldRepository;
+    final OperationRepository operationRepository;
 
-    @Override
-    public void run(String... args) throws Exception {
+    private void populatePatrons() {
         PatronGroup patronGroup = new PatronGroup("patronGroup");
         patronGroup = patronGroupRepository.save(patronGroup);
 
@@ -48,5 +49,18 @@ public class DatabaseInitializer implements CommandLineRunner {
         patronGroup.addPatron(patron2);
         patronGroup.addPatron(patron3);
         patronGroupRepository.save(patronGroup);
+    }
+//
+//    private void populateBooks() {
+//        Book book = bookRepository.save(new Book());
+//        BookField bookField = bookFieldRepository.save(BookField.builder().name("000-00").value("1234").build());
+//        bookField
+//        BookField bookField3 = bookFieldRepository.save(BookField.builder().name("100-a").value("Author").build());
+//        BookField bookField4 = bookFieldRepository.save(BookField.builder().name("245-a").value("Title").build());
+//    }
+
+    @Override
+    public void run(String... args) throws Exception {
+//        populatePatrons();
     }
 }
