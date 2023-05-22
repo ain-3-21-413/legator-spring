@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Setter
@@ -20,21 +18,11 @@ public class BookField {
     @Id
     long id;
 
-    String number;
+    String name;
+
+    String value;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
     Book book;
-
-    @OneToMany(mappedBy = "bookField", cascade = CascadeType.ALL, orphanRemoval = true)
-    final List<BookSubfield> bookSubfields;
-
-    public BookField() {
-        this.bookSubfields = new ArrayList<>();
-    }
-
-    public void addSubfield(BookSubfield bookSubfield) {
-        bookSubfields.add(bookSubfield);
-        bookSubfield.setBookField(this);
-    }
 }
