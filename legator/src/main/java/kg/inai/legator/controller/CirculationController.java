@@ -41,13 +41,13 @@ public class CirculationController {
     }
 
     @PostMapping("/check-in")
-    public void checkIn(@RequestParam("item-id") long itemId, @RequestParam("student-number") String studentNumber) {
+    public void checkIn(@RequestParam("item-id") long itemId) {
         Item item = itemRepository.findById(itemId).orElseThrow();
         if (!item.getStatus().equals(EItemStatus.CHECKED_OUT)) {
             throw new RuntimeException("not checked out");
         }
-        Patron patron = patronRepository.findById(studentNumber).orElseThrow();
-        Operation operation = operationRepository.findByItemAndPatron(item, patron).orElseThrow();
+        Operation operation = operationRepository.findByItem(item).orElseThrow();
+        Patron patron = operation.getPatron();
         operation.setItem(null);
         operation.setPatron(null);
         item.setStatus(EItemStatus.AVAILABLE);

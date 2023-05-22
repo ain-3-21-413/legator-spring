@@ -24,6 +24,6 @@ public class AppConfig {
 
     @Bean
     public ItemMapper itemMapper() {
-        return new ItemMapperImpl(bookMapper());
+        return new ItemMapperImpl(bookMapper(), patronMapper());
     }
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 public class BookMapperImpl implements BookMapper {
     @Override
     public BookDto toBookDto(Book book) {
+        if (book == null) {
+            return null;
+        }
         return new BookDto(
                 book.getId(),
                 book.getBookFields().stream().map(bookField -> {

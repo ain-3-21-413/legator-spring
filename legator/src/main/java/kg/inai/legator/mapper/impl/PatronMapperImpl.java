@@ -14,6 +14,10 @@ public class PatronMapperImpl implements PatronMapper {
     @Override
     public PatronDto toDto(Patron patron) {
 
+        if (patron == null) {
+            return null;
+        }
+
         return PatronDto.builder()
                 .studentNumber(patron.getStudentNumber())
                 .firstName(patron.getFirstName())
@@ -46,6 +50,11 @@ public class PatronMapperImpl implements PatronMapper {
 
     @Override
     public Patron toEntity(PatronDto patronDto) {
+
+        if (patronDto == null) {
+            return null;
+        }
+
         ELibrary library = null;
         EPatronStatus status = null;
         EPatronPolicy policy = null;
@@ -127,6 +136,10 @@ public class PatronMapperImpl implements PatronMapper {
 
     @Override
     public Patron toEntity(String studentNumber, PatronRequest patronRequest) {
+        if (patronRequest == null) {
+            return null;
+        }
+
         ELibrary library = null;
         EPatronStatus status = null;
         EPatronPolicy policy = null;

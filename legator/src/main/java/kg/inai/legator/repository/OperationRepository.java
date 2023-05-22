@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface OperationRepository extends JpaRepository<Operation, Long> {
 
     Optional<Operation> findByItemAndPatron(Item item, Patron patron);
+
+    Optional<Operation> findByItem(Item item);
 }
