@@ -66,7 +66,16 @@ public class PatronController {
         return patronRepository.searchPatron(
                 patronDto.firstName(),
                 patronDto.middleName(),
-                patronDto.lastName()
+                patronDto.lastName(),
+                patronDto.group(),
+                patronDto.sex(),
+                patronDto.homeroom(),
+                patronDto.secondLocation(),
+                patronDto.primaryEmail(),
+                patronDto.instituteEmail(),
+                patronDto.primaryPhone(),
+                patronDto.mobile(),
+                patronDto.messengers()
         ).stream().map(patronMapper::toDto).toList();
     }
 }

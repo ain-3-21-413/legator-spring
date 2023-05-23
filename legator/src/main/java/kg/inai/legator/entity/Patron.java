@@ -38,7 +38,7 @@ public class Patron {
     @Enumerated(EnumType.STRING)
     EHomeroom secondLocation;
     @Enumerated(EnumType.STRING)
-    EPatronGroup group;
+    EPatronGroup patronGroup;
     LocalDate graduationDate;
     LocalDate accountExpiration;
     String primaryEmail;

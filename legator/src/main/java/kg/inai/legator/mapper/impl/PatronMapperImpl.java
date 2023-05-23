@@ -30,7 +30,7 @@ public class PatronMapperImpl implements PatronMapper {
                 .sex(patron.getSex() == null ? null : patron.getSex().name())
                 .homeroom(patron.getHomeroom() == null ? null : patron.getHomeroom().name())
                 .secondLocation(patron.getSecondLocation() == null ? null : patron.getSecondLocation().name())
-                .group(patron.getGroup() == null ? "" : patron.getGroup().name())
+                .group(patron.getPatronGroup() == null ? "" : patron.getPatronGroup().name())
                 .graduationDate(patron.getGraduationDate())
                 .accountExpiration(patron.getAccountExpiration())
                 .primaryEmail(patron.getPrimaryEmail())
@@ -140,7 +140,7 @@ public class PatronMapperImpl implements PatronMapper {
                 .password(patronDto.password())
                 .generalNotes(patronDto.generalNotes())
                 .alertNotes(patronDto.alertNotes())
-                .group(group)
+                .patronGroup(group)
                 .build();
     }
 
