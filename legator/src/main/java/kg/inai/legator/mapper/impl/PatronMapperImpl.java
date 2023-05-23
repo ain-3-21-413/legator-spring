@@ -30,7 +30,7 @@ public class PatronMapperImpl implements PatronMapper {
                 .sex(patron.getSex() == null ? null : patron.getSex().name())
                 .homeroom(patron.getHomeroom() == null ? null : patron.getHomeroom().name())
                 .secondLocation(patron.getSecondLocation() == null ? null : patron.getSecondLocation().name())
-                .group(patron.getGroup() == null ? "" : patron.getGroup().getName())
+                .group(patron.getGroup() == null ? "" : patron.getGroup().name())
                 .graduationDate(patron.getGraduationDate())
                 .accountExpiration(patron.getAccountExpiration())
                 .primaryEmail(patron.getPrimaryEmail())
@@ -61,6 +61,7 @@ public class PatronMapperImpl implements PatronMapper {
         ESex sex = null;
         EHomeroom homeroom = null;
         EHomeroom secondLocation = null;
+        EPatronGroup group = null;
 
         if (patronDto.library() != null) {
             try {
@@ -105,6 +106,14 @@ public class PatronMapperImpl implements PatronMapper {
             }
         }
 
+        if (patronDto.group() != null) {
+            try {
+                group = EPatronGroup.valueOf(patronDto.group());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidSelectOptionException();
+            }
+        }
+
         return Patron.builder()
                 .studentNumber(patronDto.studentNumber())
                 .firstName(patronDto.firstName())
@@ -131,6 +140,7 @@ public class PatronMapperImpl implements PatronMapper {
                 .password(patronDto.password())
                 .generalNotes(patronDto.generalNotes())
                 .alertNotes(patronDto.alertNotes())
+                .group(group)
                 .build();
     }
 

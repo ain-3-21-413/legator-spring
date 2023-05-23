@@ -17,4 +17,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findAllByStatusAndOperation_Patron(EItemStatus eItemStatus, Patron patron);
 
     List<Item> findAllByBook(Book book);
+
+    List<Item> findAllByBookAndStatus(Book book, EItemStatus eItemStatus);
 }

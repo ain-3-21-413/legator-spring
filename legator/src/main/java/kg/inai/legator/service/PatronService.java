@@ -7,11 +7,7 @@ import java.util.List;
 
 public interface PatronService {
 
-    List<PatronDto> getPatronsByGroup(String patronGroupName);
-
     List<PatronDto> getPatrons();
-
-    void saveOrUpdatePatron(PatronDto patronDto);
 
     void addPatron(PatronDto patronDto);
 

@@ -4,6 +4,8 @@ import kg.inai.legator.dto.BookDto;
 import kg.inai.legator.dto.ItemDto;
 import kg.inai.legator.entity.Book;
 import kg.inai.legator.entity.BookField;
+import kg.inai.legator.entity.Item;
+import kg.inai.legator.enums.EItemStatus;
 import kg.inai.legator.mapper.BookMapper;
 import kg.inai.legator.mapper.ItemMapper;
 import kg.inai.legator.repository.BookFieldRepository;
@@ -65,9 +67,14 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public List<BookDto> search(@RequestParam("name") String name, @RequestParam("value") String value) {
+    public List<ItemDto> search(@RequestParam("name") String name, @RequestParam("value") String value) {
         List<BookField> bookFields = bookFieldRepository.customFind(name, value);
-        return bookFields.stream().map(BookField::getBook).map(bookMapper::toBookDto).toList();
-//        itemRepository.findAllByBookAnd
+        List<Book> books = bookFields.stream().map(BookField::getBook).toList();
+        List<Item> items = new ArrayList<>();
+        for (Book book : books) {
+            List<Item> allByBookAndStatus = itemRepository.findAllByBookAndStatus(book, EItemStatus.AVAILABLE);
+            items.addAll(allByBookAndStatus);
+        }
+        return items.stream().map(itemMapper::toItemDto).toList();
     }
 }

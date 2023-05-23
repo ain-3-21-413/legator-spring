@@ -7,6 +7,7 @@ import kg.inai.legator.dto.request.PatronRequest;
 import kg.inai.legator.entity.Patron;
 import kg.inai.legator.enums.EItemStatus;
 import kg.inai.legator.mapper.ItemMapper;
+import kg.inai.legator.mapper.PatronMapper;
 import kg.inai.legator.repository.ItemRepository;
 import kg.inai.legator.repository.OperationArchiveRepository;
 import kg.inai.legator.repository.PatronRepository;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -29,20 +31,11 @@ public class PatronController {
     final ItemRepository itemRepository;
     final ItemMapper itemMapper;
     final OperationArchiveRepository operationArchiveRepository;
-
-    @GetMapping("/{patron-group-name}")
-    public List<PatronDto> getPatronsByGroup(@PathVariable("patron-group-name") String patronGroupName) {
-        return patronService.getPatronsByGroup(patronGroupName);
-    }
+    final PatronMapper patronMapper;
 
     @GetMapping
     public List<PatronDto> getPatrons() {
         return patronService.getPatrons();
-    }
-
-
-    public void saveOrUpdatePatron(@RequestBody PatronDto patronDto) {
-        patronService.saveOrUpdatePatron(patronDto);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -66,5 +59,14 @@ public class PatronController {
     public List<ItemDto> getCheckOutHistory(@PathVariable("student-number") String studentNumber) {
         Patron patron = patronRepository.findById(studentNumber).orElseThrow();
         return operationArchiveRepository.findAllByPatron(patron).stream().map(itemMapper::toItemDto).toList();
+    }
+
+    @PostMapping("/search")
+    public List<PatronDto> search(@RequestBody PatronDto patronDto) {
+        return patronRepository.searchPatron(
+                patronDto.firstName(),
+                patronDto.middleName(),
+                patronDto.lastName()
+        ).stream().map(patronMapper::toDto).toList();
     }
 }

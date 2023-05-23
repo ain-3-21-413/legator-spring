@@ -15,6 +15,6 @@ public interface BookFieldRepository extends JpaRepository<BookField, Long> {
 
     Optional<BookField> findByNameAndBook(String s, Book newBook);
 
-    @Query("SELECT f FROM BookField f WHERE f.name = :name and f.value LIKE &:value%")
+    @Query("SELECT f FROM BookField f WHERE f.name = :name and f.value LIKE %:value%")
     List<BookField> customFind(String name, String value);
 }

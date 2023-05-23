@@ -37,9 +37,8 @@ public class Patron {
     EHomeroom homeroom;
     @Enumerated(EnumType.STRING)
     EHomeroom secondLocation;
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    PatronGroup group;
+    @Enumerated(EnumType.STRING)
+    EPatronGroup group;
     LocalDate graduationDate;
     LocalDate accountExpiration;
     String primaryEmail;
@@ -61,15 +60,4 @@ public class Patron {
     List<Operation> operations = new ArrayList<>();
     @OneToMany(mappedBy = "patron")
     List<OperationArchive> operationArchives = new ArrayList<>();
-    public void setGroup(PatronGroup group) {
-        if (this.group != null) {
-            this.getGroup().getPatrons().remove(this);
-        }
-
-        this.group = group;
-
-        if (this.group != null) {
-            this.group.getPatrons().add(this);
-        }
-    }
 }
