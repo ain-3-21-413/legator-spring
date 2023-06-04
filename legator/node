@@ -33,7 +33,7 @@ List<Patron> matchingPatrons = patronRepository.findMatchingPatrons(
         secondLocation
 );
 
-INSERT INTO Patron (studentNumber, firstName, middleName, lastName, library, status, policy, birthDate, sex, homeroom, secondLocation, patronGroup, graduationDate, accountExpiration, primaryEmail, instituteEmail, primaryPhone, mobile, messengers, address1, address2, contactNotes, username, password, generalNotes, alertNotes)
+INSERT INTO patron (student_number, first_name, middle_name, last_name, library, status, policy, birth_date, sex, homeroom, second_location, patron_group, graduation_date, account_expiration, primary_email, institute_email, primary_phone, mobile, messengers, address1, address2, contact_notes, username, password, general_notes, alert_notes)
 VALUES
   ('S001', 'John', 'Doe', 'Smith', 'INAI_KG', 'ACTIVE', 'BASIC_STUDENT', '1995-02-10', 'MALE', 'R201', 'R202', 'AIN120', '2023-06-01', '2023-12-31', 'john.doe@gmail.com', 'john.smith@institute.edu', '123456789', '987654321', 'WhatsApp', '123 Main St', 'Apt 456', 'Some notes about the contact', 'johndoe', 'password1', 'Some general notes', 'Some alert notes'),
   ('S002', 'Jane', 'Mary', 'Johnson', 'INAI_KG', 'ACTIVE', 'PROFESSOR', '1985-08-22', 'FEMALE', 'R203', 'R204', 'AIN220', '2023-06-01', '2024-05-31', 'jane.johnson@gmail.com', 'jane.johnson@institute.edu', '987654321', '123456789', 'Telegram', '456 Elm St', 'Apt 789', 'Some notes about the contact', 'janejohnson', 'password2', 'Some general notes', 'Some alert notes'),
