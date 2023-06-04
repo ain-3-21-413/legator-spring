@@ -1,0 +1,34 @@
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface PatronRepository extends JpaRepository<Patron, String> {
+
+    @Query("SELECT p FROM Patron p WHERE " +
+           "(:firstName IS NULL OR p.firstName LIKE %:firstName%) AND " +
+           "(:middleName IS NULL OR p.middleName LIKE %:middleName%) AND " +
+           "(:lastName IS NULL OR p.lastName LIKE %:lastName%) AND " +
+           "(:homeroom IS NULL OR p.homeroom = :homeroom) AND " +
+           "(:secondLocation IS NULL OR p.secondLocation = :secondLocation)")
+    List<Patron> findMatchingPatrons(
+            @Param("firstName") String firstName,
+            @Param("middleName") String middleName,
+            @Param("lastName") String lastName,
+            @Param("homeroom") EHomeroom homeroom,
+            @Param("secondLocation") EHomeroom secondLocation
+    );
+}
+
+String firstName = "";            // firstName from the model
+String middleName = "";           // middleName from the model
+String lastName = "";             // lastName from the model
+EHomeroom homeroom = null;        // homeroom from the model
+EHomeroom secondLocation = null;  // secondLocation from the model
+
+List<Patron> matchingPatrons = patronRepository.findMatchingPatrons(
+        firstName,
+        middleName,
+        lastName,
+        homeroom,
+        secondLocation
+);
