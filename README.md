@@ -1,4 +1,4 @@
-Library Management System | Spring Boot, SolidJS, MySQL, Git
+## Library Management System | Spring Boot, SolidJS, MySQL, Git
 • Developed a Full-Stack web application for coursework project.
 • The frontend was developed using SolidJS.
 • The backend was built utilizing Spring Boot.
